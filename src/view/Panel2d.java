@@ -1,13 +1,13 @@
 package view;
 
 import java.awt.Color;
+
 import javax.swing.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
@@ -25,6 +25,10 @@ public class Panel2d extends JPanel
 	private JTextField nRow;
 	private JTextArea entityArea;
 	private JTextField nCol;
+	private String line;
+	
+	public String userText;
+	
 	
 	public Panel2d(Controller2d baseController)
 	{
@@ -32,19 +36,20 @@ public class Panel2d extends JPanel
 		baseLayout = new SpringLayout();
 		submitButton = new JButton("set button");
 		getButton = new JButton("get button");
-		baseLayout.putConstraint(SpringLayout.NORTH, getButton, 0, SpringLayout.NORTH, submitButton);
-		baseLayout.putConstraint(SpringLayout.WEST, getButton, 6, SpringLayout.EAST, submitButton);
 		firstTextField = new JTextField("words can be type here", 20);
 		entityArea = new JTextArea(10,30);
 		typingField = new JTextField("asda");
 		nRow = new JTextField("8");
 		nCol = new JTextField("8");
+		line = "";
 		
 		setupPanel();
 		setupLayout();
 		setupListeners();
+
 	}
 	
+
 	private void setupPanel()
 	{
 		this.setLayout(baseLayout);
@@ -71,6 +76,8 @@ public class Panel2d extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, nRow, 6, SpringLayout.EAST, firstTextField);
 		baseLayout.putConstraint(SpringLayout.NORTH, nCol, 0, SpringLayout.NORTH, firstTextField);
 		baseLayout.putConstraint(SpringLayout.WEST, nCol, 6, SpringLayout.EAST, nRow);
+		baseLayout.putConstraint(SpringLayout.NORTH, getButton, 0, SpringLayout.NORTH, submitButton);
+		baseLayout.putConstraint(SpringLayout.WEST, getButton, 6, SpringLayout.EAST, submitButton);
 		
 	}
 	
@@ -84,12 +91,45 @@ public class Panel2d extends JPanel
 				int col = Integer.parseInt(nRow.getText());
 				String userText = firstTextField.getText(); 
 				setValue();
+				baseController.setEntity(baseController.entity);
 				firstTextField.setText("");
-//				entityArea.append(String[][] entity); 
+				printOut();
 			}
 		});
+		
+		getButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				int row = Integer.parseInt(nRow.getText());
+				int col = Integer.parseInt(nRow.getText());
+				getValue();
+			}
+		});
+	
+	}
+
+	public void printOut()
+	{
+		for (int row = 0; row < baseController.entity.length; row++)
+		    {
+		      for (int col = 0; col < baseController.entity[0].length; col++)
+		      {
+		        line = line + ( baseController.entity[row][col] + " " );
+		      }
+		      entityArea.append(line);
+		      line = "";
+    	    }   
 	}
 	
-	
-	
+	  public void setValue()
+	  {
+		  baseController.entity[baseController.row][baseController.col] = userText;
+		  baseController.setEntity(baseController.entity);
+	  }
+	  
+	  public String getValue()
+	  {
+		  return baseController.entity[baseController.row][baseController.col]; 
+	  }
 }
