@@ -1,9 +1,7 @@
 package view;
 
 import java.awt.Color;
-
 import javax.swing.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,6 +18,7 @@ public class Panel2d extends JPanel
 {
 	private Controller2d baseController;
 	private JButton submitButton;
+	private JButton getButton;
 	private JTextField firstTextField;
 	private SpringLayout baseLayout;
 	private JTextField typingField;
@@ -31,7 +30,10 @@ public class Panel2d extends JPanel
 	{
 		this.baseController = baseController;
 		baseLayout = new SpringLayout();
-		submitButton = new JButton("click the button");
+		submitButton = new JButton("set button");
+		getButton = new JButton("get button");
+		baseLayout.putConstraint(SpringLayout.NORTH, getButton, 0, SpringLayout.NORTH, submitButton);
+		baseLayout.putConstraint(SpringLayout.WEST, getButton, 6, SpringLayout.EAST, submitButton);
 		firstTextField = new JTextField("words can be type here", 20);
 		entityArea = new JTextArea(10,30);
 		typingField = new JTextField("asda");
@@ -52,6 +54,7 @@ public class Panel2d extends JPanel
 		this.add(nCol);
 		this.add(entityArea);
 		this.add(submitButton);
+		this.add(getButton);
 		typingField.setToolTipText("Type here for the chatbot");
 		entityArea.setEnabled(false);
 	}
@@ -77,13 +80,16 @@ public class Panel2d extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				int row = nRow.getText();
-				
+				int row = Integer.parseInt(nRow.getText());
+				int col = Integer.parseInt(nRow.getText());
 				String userText = firstTextField.getText(); 
+				setValue();
 				firstTextField.setText("");
 //				entityArea.append(String[][] entity); 
 			}
 		});
 	}
+	
+	
 	
 }

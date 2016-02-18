@@ -1,6 +1,8 @@
 package model;
 
 import java.util.Scanner;
+import controller.Controller2d;
+import view.Panel2d;
 
 public class Dice 
 {
@@ -40,13 +42,13 @@ public class Dice
 	   		};
 	  }
 	
-//	  public void setValue()
-//	  {
-//		  entity[row][col] = creature.nextString();
-//	  }
-//	  
-//	  public String getValue()
-//	  {
-//		  return entity[row][col]; 
-//	  }
+	  public void setValue()
+	  {
+		  entity[row][col] = String userText;
+	  }
+	  
+	  public String getValue()
+	  {
+		  return entity[row][col]; 
+	  }
 }
