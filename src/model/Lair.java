@@ -8,7 +8,7 @@ public class Lair
 	
 	public Lair()
 	{
-		this.numberOfMonsters = 1;
+		this.numberOfMonsters = 2;
 		this.monsterType = "Goblin";
 	}
 	
@@ -19,7 +19,7 @@ public class Lair
 	
 	public String toString()
 	{
-		String entityDescription = "This lair has " + numberOfMonsters + "monsters, and they are " + monsterType;
+		String entityDescription = "This lair has " + numberOfMonsters + " monster(s), and they are " + monsterType + "'s";
 		
 		return entityDescription;
 	}

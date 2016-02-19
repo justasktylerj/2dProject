@@ -29,10 +29,10 @@ public class Panel2d extends JPanel
 		changeButton = new JButton("change the indicated lair");
 		displayButton = new JButton("display the indicated lair");
 		editField = new JTextField(20);
-
 		nRow = new JTextField(5);
 		nCol = new JTextField(5);
 		currentLair = new JLabel("the current lair");
+		
 		
 		setupTable();
 		setupPanel();
@@ -46,7 +46,8 @@ public class Panel2d extends JPanel
 	{
 		String [] columnHeaders = {"Column 0", "Column 1", "Column 2", "Column 3"};
 		DefaultTableModel tableModel = new DefaultTableModel(baseController.getMyLairs(), columnHeaders);
-		lairTable = new JTable(tableModel);
+		lairTable = new JTable(tableModel);	
+		baseLayout.putConstraint(SpringLayout.NORTH, lairTable, 150, SpringLayout.NORTH, this);
 	}
 	
 	private void setupPanel()
@@ -74,8 +75,11 @@ public class Panel2d extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, nRow, 12, SpringLayout.EAST, editField);
 		baseLayout.putConstraint(SpringLayout.NORTH, nCol, 0, SpringLayout.NORTH, editField);
 		baseLayout.putConstraint(SpringLayout.WEST, nCol, 6, SpringLayout.EAST, nRow);
-		baseLayout.putConstraint(SpringLayout.NORTH, currentLair, 6, SpringLayout.SOUTH, lairTable);
-		baseLayout.putConstraint(SpringLayout.EAST, currentLair, -10, SpringLayout.EAST, lairTable);
+		baseLayout.putConstraint(SpringLayout.SOUTH, currentLair, -10, SpringLayout.NORTH, changeButton);
+		baseLayout.putConstraint(SpringLayout.EAST, currentLair, -158, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.WEST, lairTable, 0, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, lairTable, -199, SpringLayout.NORTH, currentLair);
+		baseLayout.putConstraint(SpringLayout.EAST, lairTable, 0, SpringLayout.EAST, this);
 	}
 	
 	private void setupListeners()
