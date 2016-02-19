@@ -1,7 +1,7 @@
 package controller;
 
 import java.util.Scanner;
-
+import model.Lair;
 import view.Frame2d;
 import view.Panel2d;
 
@@ -9,56 +9,43 @@ public class Controller2d
 {
 	private Frame2d baseFrame;
 	private Panel2d basePanel;
-	public int row;
-	public int col;
-	public String[][] entity = null;
+	private Lair [][] myLairs;
 	
 	public Controller2d(Panel2d basePanel)
 	{
+		myLairs= new Lair[4][4];
+		setupArray();
 		baseFrame = new Frame2d(this);
 	}
 	
 	public void start()
 	{
-		row = 0;
-		col = 0;
-		fillPattern1();
-		setEntity(entity);
+		
 	}
 	
-	public void setEntity(String[][] entity)
-	  {
-	    this.entity = entity;
-	  }
+	private void setupArray()
+	{
+		for(int row = 0; row < myLairs.length; row++)
+		{
+			for(int col = 0; col < myLairs[0].length; col++)
+			{
+				myLairs[row][col] = new Lair();
+				if(col % 2 == 0)
+				{
+					myLairs[row][col].setNumberOfMonsters(col + 5);
+				}
+				else
+				{
+					myLairs[row][col].setMonsterType("goblin");
+				}
+			}
+			
+		}
+	}
 	
-//	  public void print()
-//	  {
-//	    for (int row = 0; row < entity.length; row++)
-//	    {
-//	      for (int col = 0; col < entity[0].length; col++)
-//	      {
-//	        System.out.print( entity[row][col] + " " );
-//	      }
-//	      System.out.println();
-//	    }
-//	    System.out.println();
-//	  }
-	  
-	  
-	
-	
-	  public void fillPattern1()
-	  {
-	    String[][] entity = {
-	    		{ "", "", "", "", "", "", "", "" },
-	    		{ "", "", "", "", "", "", "", "" },
-	    		{ "", "", "", "", "", "", "", "" },
-	    		{ "", "", "", "", "", "", "", "" },
-	    		{ "", "", "", "", "", "", "", "" },
-	    		{ "", "", "", "", "", "", "", "" },
-	    		{ "", "", "", "", "", "", "", "" },
-	    		{ "", "", "", "", "", "", "", "" },
-	   		};
-	  }
+	public Lair [][] getMyLairs()
+	{
+		return myLairs;
+	}
 
 }

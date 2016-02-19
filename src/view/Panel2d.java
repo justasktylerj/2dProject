@@ -1,135 +1,101 @@
 package view;
 
 import java.awt.Color;
-
 import javax.swing.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SpringLayout;
+import javax.swing.table.DefaultTableModel;
 
 import controller.Controller2d;
 
 public class Panel2d extends JPanel
 {
 	private Controller2d baseController;
-	private JButton submitButton;
-	private JButton getButton;
-	private JTextField firstTextField;
 	private SpringLayout baseLayout;
-	private JTextField typingField;
 	private JTextField nRow;
-	private JTextArea entityArea;
 	private JTextField nCol;
-	private String line;
+	private JTextField editField;
+	private JLabel currentLair;
+	private JButton changeButton;
+	private JButton displayButton;
+	private JTable lairTable;
 	
-	public String userText;
 	
 	
 	public Panel2d(Controller2d baseController)
 	{
 		this.baseController = baseController;
 		baseLayout = new SpringLayout();
-		submitButton = new JButton("set button");
-		getButton = new JButton("get button");
-		firstTextField = new JTextField("words can be type here", 20);
-		entityArea = new JTextArea(10,30);
-		typingField = new JTextField("asda");
-		nRow = new JTextField("8");
-		nCol = new JTextField("8");
-		line = "";
+		changeButton = new JButton("change the indicated lair");
+		displayButton = new JButton("display the indicated lair");
+		editField = new JTextField(20);
+
+		nRow = new JTextField(5);
+		nCol = new JTextField(5);
+		currentLair = new JLabel("the current lair");
 		
+		setupTable();
 		setupPanel();
 		setupLayout();
 		setupListeners();
-
+	}
+/**
+ * Helper method to load information from the mel into the GUI as a 2d array
+ */
+	private void setupTable()
+	{
+		String [] columnHeaders = {"Column 0", "Column 1", "Column 2", "Column 3"};
+		DefaultTableModel tableModel = new DefaultTableModel(baseController.getMyLairs(), columnHeaders);
+		lairTable = new JTable(tableModel);
 	}
 	
-
 	private void setupPanel()
 	{
 		this.setLayout(baseLayout);
 		this.setBackground(Color.MAGENTA);
-		this.add(firstTextField);
+		this.add(editField);
 		this.add(nRow);
 		this.add(nCol);
-		this.add(entityArea);
-		this.add(submitButton);
-		this.add(getButton);
-		typingField.setToolTipText("Type here for the chatbot");
-		entityArea.setEnabled(false);
+		this.add(lairTable);
+		this.add(changeButton);
+		this.add(displayButton);
+		this.add(currentLair);
 	}
 	
 	private void setupLayout()
 	{
-		baseLayout.putConstraint(SpringLayout.SOUTH, firstTextField, -25, SpringLayout.SOUTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, submitButton, 0, SpringLayout.WEST, firstTextField);
-		baseLayout.putConstraint(SpringLayout.SOUTH, submitButton, -2, SpringLayout.NORTH, firstTextField);
-		baseLayout.putConstraint(SpringLayout.WEST, firstTextField, 10, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, entityArea, -103, SpringLayout.SOUTH, this);
-		baseLayout.putConstraint(SpringLayout.EAST, entityArea, -40, SpringLayout.EAST, this);
-		baseLayout.putConstraint(SpringLayout.NORTH, nRow, 0, SpringLayout.NORTH, firstTextField);
-		baseLayout.putConstraint(SpringLayout.WEST, nRow, 6, SpringLayout.EAST, firstTextField);
-		baseLayout.putConstraint(SpringLayout.NORTH, nCol, 0, SpringLayout.NORTH, firstTextField);
+		baseLayout.putConstraint(SpringLayout.EAST, changeButton, -10, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, changeButton, 0, SpringLayout.NORTH, displayButton);
+		baseLayout.putConstraint(SpringLayout.WEST, displayButton, 0, SpringLayout.WEST, editField);
+		baseLayout.putConstraint(SpringLayout.SOUTH, displayButton, -6, SpringLayout.NORTH, editField);
+		baseLayout.putConstraint(SpringLayout.SOUTH, editField, -12, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, editField, 10, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, nRow, 0, SpringLayout.NORTH, editField);
+		baseLayout.putConstraint(SpringLayout.WEST, nRow, 12, SpringLayout.EAST, editField);
+		baseLayout.putConstraint(SpringLayout.NORTH, nCol, 0, SpringLayout.NORTH, editField);
 		baseLayout.putConstraint(SpringLayout.WEST, nCol, 6, SpringLayout.EAST, nRow);
-		baseLayout.putConstraint(SpringLayout.NORTH, getButton, 0, SpringLayout.NORTH, submitButton);
-		baseLayout.putConstraint(SpringLayout.WEST, getButton, 6, SpringLayout.EAST, submitButton);
-		
+		baseLayout.putConstraint(SpringLayout.NORTH, currentLair, 6, SpringLayout.SOUTH, lairTable);
+		baseLayout.putConstraint(SpringLayout.EAST, currentLair, -10, SpringLayout.EAST, lairTable);
 	}
 	
 	private void setupListeners()
 	{
-		submitButton.addActionListener(new ActionListener()
+		changeButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				int row = Integer.parseInt(nRow.getText());
-				int col = Integer.parseInt(nRow.getText());
-				String userText = firstTextField.getText(); 
-				setValue();
-				baseController.setEntity(baseController.entity);
-				firstTextField.setText("");
-				printOut();
+				
 			}
 		});
 		
-		getButton.addActionListener(new ActionListener()
+		displayButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				int row = Integer.parseInt(nRow.getText());
-				int col = Integer.parseInt(nRow.getText());
-				getValue();
+
 			}
 		});
 	
 	}
-
-	public void printOut()
-	{
-		for (int row = 0; row < baseController.entity.length; row++)
-		    {
-		      for (int col = 0; col < baseController.entity[0].length; col++)
-		      {
-		        line = line + ( baseController.entity[row][col] + " " );
-		      }
-		      entityArea.append(line);
-		      line = "";
-    	    }   
-	}
 	
-	  public void setValue()
-	  {
-		  baseController.entity[baseController.row][baseController.col] = userText;
-		  baseController.setEntity(baseController.entity);
-	  }
-	  
-	  public String getValue()
-	  {
-		  return baseController.entity[baseController.row][baseController.col]; 
-	  }
 }
