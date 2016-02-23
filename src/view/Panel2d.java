@@ -19,7 +19,9 @@ public class Panel2d extends JPanel
 	private JButton changeButton;
 	private JButton displayButton;
 	private JTable lairTable;
-	
+	private int rowGet;
+	private int colGet;
+	public String newText;
 	
 	
 	public Panel2d(Controller2d baseController)
@@ -32,7 +34,9 @@ public class Panel2d extends JPanel
 		nRow = new JTextField(5);
 		nCol = new JTextField(5);
 		currentLair = new JLabel("the current lair");
-		
+		rowGet = 0;
+		colGet = 0;
+		newText = "";
 		
 		setupTable();
 		setupPanel();
@@ -88,7 +92,10 @@ public class Panel2d extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				
+				rowGet = Integer.parseInt(nRow.getText());
+				colGet = Integer.parseInt(nCol.getText());
+				newText = baseController.myLairs[rowGet][colGet].toString();
+				editField.setText(newText);
 			}
 		});
 		
@@ -96,7 +103,7 @@ public class Panel2d extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-
+				
 			}
 		});
 	

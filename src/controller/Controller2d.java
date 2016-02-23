@@ -9,11 +9,11 @@ public class Controller2d
 {
 	private Frame2d baseFrame;
 	private Panel2d basePanel;
-	private Lair [][] myLairs;
+	public Lair [][] myLairs;
 	
 	public Controller2d(Panel2d basePanel)
 	{
-		myLairs= new Lair[4][4];
+		myLairs = new Lair[4][4];
 		setupArray();
 		baseFrame = new Frame2d(this);
 	}
