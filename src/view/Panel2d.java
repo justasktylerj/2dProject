@@ -41,7 +41,7 @@ public class Panel2d extends JPanel
 		
 		editFieldType = new JTextField(5);
 		
-		editFieldNumber = new JTextField(5);
+		editFieldNumber = new JTextField(3);
 		
 		nRow = new JTextField(5);
 		
@@ -142,7 +142,7 @@ public class Panel2d extends JPanel
 				newType = baseController.myLairs[rowGet][colGet].getMonsterType();
 				editFieldType.setText(newType);
 				newNumber = baseController.myLairs[rowGet][colGet].getNumberOfMonsters();
-				String NewNumberString = Integer.toString(newNumber);
+				newNumberString = Integer.toString(newNumber);
 				editFieldNumber.setText(newNumberString);
 				
 				
