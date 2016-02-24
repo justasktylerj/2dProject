@@ -28,7 +28,9 @@ public class Panel2d extends JPanel
 	public String newType;
 	public int newNumber;
 	private String newNumberString;
-//	public Lair newLair;
+	public Lair newLair;
+	public int changeNumber;
+	public String changeType;
 	
 	
 	public Panel2d(Controller2d baseController)
@@ -36,30 +38,23 @@ public class Panel2d extends JPanel
 		this.baseController = baseController;
 		baseLayout = new SpringLayout();
 		changeButton = new JButton("change the indicated lair");
-		
 		displayButton = new JButton("display the indicated lair");
-		
 		editFieldType = new JTextField(5);
-		
 		editFieldNumber = new JTextField(3);
-		
 		nRow = new JTextField(5);
-		
 		nCol = new JTextField(5);
-		
 		currentLair = new JLabel("the current lair");
-		
 		thisLair = new JLabel("This lair has ");
-		
+		baseLayout.putConstraint(SpringLayout.WEST, thisLair, 0, SpringLayout.WEST, this);
 		hasLair = new JLabel(" monster(s), and they are ");
-		
 		endLair = new JLabel("'s.");			
-		
 		rowGet = 0;
 		colGet = 0;
 		newType = "";
 		newNumber = 0;
 		newNumberString = "";
+		changeNumber = 0;
+		changeType = "";
 		
 		setupTable();
 		setupPanel();
@@ -74,9 +69,7 @@ public class Panel2d extends JPanel
 		String [] columnHeaders = {"Column 0", "Column 1", "Column 2", "Column 3"};
 		DefaultTableModel tableModel = new DefaultTableModel(baseController.getMyLairs(), columnHeaders);
 		lairTable = new JTable(tableModel);
-		baseLayout.putConstraint(SpringLayout.NORTH, lairTable, 44, SpringLayout.SOUTH, changeButton);
-		baseLayout.putConstraint(SpringLayout.SOUTH, lairTable, -15, SpringLayout.NORTH, changeButton);
-		baseLayout.putConstraint(SpringLayout.WEST, thisLair, 0, SpringLayout.WEST, lairTable);
+		
 	}
 	
 	private void setupPanel()
@@ -99,6 +92,11 @@ public class Panel2d extends JPanel
 	
 	private void setupLayout()
 	{
+		baseLayout.putConstraint(SpringLayout.NORTH, lairTable, -68, SpringLayout.SOUTH, changeButton);
+		baseLayout.putConstraint(SpringLayout.WEST, lairTable, 10, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, lairTable, -141, SpringLayout.NORTH, changeButton);
+		baseLayout.putConstraint(SpringLayout.EAST, lairTable, 427, SpringLayout.WEST, this);
+		//Table
 		baseLayout.putConstraint(SpringLayout.WEST, changeButton, 0, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.EAST, displayButton, -10, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, displayButton, -6, SpringLayout.NORTH, editFieldType);
@@ -118,6 +116,7 @@ public class Panel2d extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, hasLair, 90, SpringLayout.EAST, thisLair);
 		baseLayout.putConstraint(SpringLayout.NORTH, endLair, 6, SpringLayout.NORTH, editFieldType);
 		baseLayout.putConstraint(SpringLayout.WEST, endLair, 6, SpringLayout.EAST, editFieldType);
+		
 	}
 	
 	private void setupListeners()
@@ -128,8 +127,10 @@ public class Panel2d extends JPanel
 			{
 				rowGet = Integer.parseInt(nRow.getText());
 				colGet = Integer.parseInt(nCol.getText());
-//				newType = editFieldType(getText); 
-//				baseController.myLairs[rowGet][colGet] = ;
+				changeNumber = Integer.parseInt(editFieldNumber.getText());
+				baseController.myLairs[rowGet][colGet].setNumberOfMonsters(changeNumber);
+				changeType = editFieldType.getText();
+				baseController.myLairs[rowGet][colGet].setMonsterType(changeType);
 			}
 		});
 		
