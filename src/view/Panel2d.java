@@ -27,6 +27,7 @@ public class Panel2d extends JPanel
 	private int colGet;
 	public String newType;
 	public int newNumber;
+	private String newNumberString;
 //	public Lair newLair;
 	
 	
@@ -48,6 +49,7 @@ public class Panel2d extends JPanel
 		colGet = 0;
 		newType = "";
 		newNumber = 0;
+		newNumberString = "";
 		
 		setupTable();
 		setupPanel();
@@ -133,7 +135,8 @@ public class Panel2d extends JPanel
 				newType = baseController.myLairs[rowGet][colGet].getMonsterType();
 				editFieldType.setText(newType);
 				newNumber = baseController.myLairs[rowGet][colGet].getNumberOfMonsters();
-				editFieldNumber.setText(newNumber);
+				String NewNumberString = Integer.toString(newNumber);
+				editFieldNumber.setText(newNumberString);
 				
 				
 			}
