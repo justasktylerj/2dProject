@@ -23,6 +23,7 @@ public class Panel2d extends JPanel
 	private JButton changeButton;
 	private JButton displayButton;
 	private JTable lairTable;
+	private JTable newTable;
 	private int rowGet;
 	private int colGet;
 	public String newType;
@@ -63,7 +64,7 @@ public class Panel2d extends JPanel
 /**
  * Helper method to load information from the mel into the GUI as a 2d array
  */
-	private void setupTable()
+	public void setupTable()
 	{
 		String [] columnHeaders = {"Column 0", "Column 1", "Column 2", "Column 3"};
 		DefaultTableModel tableModel = new DefaultTableModel(baseController.getMyLairs(), columnHeaders);
@@ -129,6 +130,7 @@ public class Panel2d extends JPanel
 				baseController.myLairs[rowGet][colGet].setNumberOfMonsters(changeNumber);
 				changeType = editFieldType.getText();
 				baseController.myLairs[rowGet][colGet].setMonsterType(changeType);
+				updateLair();
 			}
 		});
 		
@@ -150,4 +152,9 @@ public class Panel2d extends JPanel
 	
 	}
 	
+	public void updateLair()
+	{
+		
+		lairTable = newTable;
+	}
 }

@@ -36,7 +36,7 @@ public class Controller2d
 				}
 				else
 				{
-					myLairs[row][col].setMonsterType("goblin");
+					myLairs[row][col].setMonsterType("Goblin");
 				}
 			}
 			
