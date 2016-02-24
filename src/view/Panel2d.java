@@ -37,16 +37,15 @@ public class Panel2d extends JPanel
 	{
 		this.baseController = baseController;
 		baseLayout = new SpringLayout();
-		changeButton = new JButton("change the indicated lair");
+		changeButton = new JButton("change the indicated lair");		
 		displayButton = new JButton("display the indicated lair");
 		editFieldType = new JTextField(5);
-		editFieldNumber = new JTextField(3);
+		editFieldNumber = new JTextField(3);		
 		nRow = new JTextField(5);
 		nCol = new JTextField(5);
 		currentLair = new JLabel("Current Lair:  ,  ");
-		thisLair = new JLabel("This lair has ");
-		baseLayout.putConstraint(SpringLayout.WEST, thisLair, 0, SpringLayout.WEST, this);
-		hasLair = new JLabel(" monster(s), and they are ");
+		thisLair = new JLabel("This lair has ");				
+		hasLair = new JLabel(" monster(s), and they are ");		
 		endLair = new JLabel("'s.");			
 		rowGet = 0;
 		colGet = 0;
@@ -68,8 +67,7 @@ public class Panel2d extends JPanel
 	{
 		String [] columnHeaders = {"Column 0", "Column 1", "Column 2", "Column 3"};
 		DefaultTableModel tableModel = new DefaultTableModel(baseController.getMyLairs(), columnHeaders);
-		lairTable = new JTable(tableModel);
-		
+		lairTable = new JTable(tableModel);	
 	}
 	
 	private void setupPanel()
@@ -92,15 +90,14 @@ public class Panel2d extends JPanel
 	
 	private void setupLayout()
 	{
-		baseLayout.putConstraint(SpringLayout.NORTH, lairTable, -68, SpringLayout.SOUTH, changeButton);
 		baseLayout.putConstraint(SpringLayout.WEST, lairTable, 10, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, lairTable, -141, SpringLayout.NORTH, changeButton);
-		baseLayout.putConstraint(SpringLayout.EAST, lairTable, 427, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, lairTable, 40, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, lairTable, 150, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.EAST, lairTable, -10, SpringLayout.EAST, this);
 		//Table
 		baseLayout.putConstraint(SpringLayout.WEST, changeButton, 0, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.EAST, displayButton, -10, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, displayButton, -6, SpringLayout.NORTH, editFieldType);
-		baseLayout.putConstraint(SpringLayout.SOUTH, changeButton, -6, SpringLayout.NORTH, editFieldNumber);
 		baseLayout.putConstraint(SpringLayout.NORTH, editFieldType, 0, SpringLayout.NORTH, editFieldNumber);
 		baseLayout.putConstraint(SpringLayout.SOUTH, nRow, -10, SpringLayout.SOUTH, this);
 		baseLayout.putConstraint(SpringLayout.EAST, nRow, -179, SpringLayout.EAST, this);
@@ -108,15 +105,16 @@ public class Panel2d extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, nCol, 26, SpringLayout.EAST, nRow);
 		baseLayout.putConstraint(SpringLayout.NORTH, currentLair, 6, SpringLayout.NORTH, nRow);
 		baseLayout.putConstraint(SpringLayout.WEST, currentLair, 25, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, thisLair, -18, SpringLayout.NORTH, currentLair);
-		baseLayout.putConstraint(SpringLayout.NORTH, editFieldNumber, -6, SpringLayout.NORTH, thisLair);
 		baseLayout.putConstraint(SpringLayout.WEST, editFieldType, 1, SpringLayout.EAST, hasLair);
 		baseLayout.putConstraint(SpringLayout.EAST, editFieldNumber, -6, SpringLayout.WEST, hasLair);
-		baseLayout.putConstraint(SpringLayout.NORTH, hasLair, 0, SpringLayout.NORTH, thisLair);
-		baseLayout.putConstraint(SpringLayout.WEST, hasLair, 90, SpringLayout.EAST, thisLair);
 		baseLayout.putConstraint(SpringLayout.NORTH, endLair, 6, SpringLayout.NORTH, editFieldType);
 		baseLayout.putConstraint(SpringLayout.WEST, endLair, 6, SpringLayout.EAST, editFieldType);
-		
+		baseLayout.putConstraint(SpringLayout.SOUTH, changeButton, -78, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, editFieldNumber, 6, SpringLayout.SOUTH, changeButton);
+		baseLayout.putConstraint(SpringLayout.NORTH, thisLair, 6, SpringLayout.NORTH, editFieldType);
+		baseLayout.putConstraint(SpringLayout.EAST, thisLair, -6, SpringLayout.WEST, editFieldNumber);
+		baseLayout.putConstraint(SpringLayout.WEST, hasLair, 171, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, hasLair, -12, SpringLayout.NORTH, nRow);
 	}
 	
 	private void setupListeners()
