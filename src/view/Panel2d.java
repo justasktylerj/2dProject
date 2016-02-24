@@ -43,7 +43,7 @@ public class Panel2d extends JPanel
 		editFieldNumber = new JTextField(3);
 		nRow = new JTextField(5);
 		nCol = new JTextField(5);
-		currentLair = new JLabel("the current lair");
+		currentLair = new JLabel("Current Lair:  ,  ");
 		thisLair = new JLabel("This lair has ");
 		baseLayout.putConstraint(SpringLayout.WEST, thisLair, 0, SpringLayout.WEST, this);
 		hasLair = new JLabel(" monster(s), and they are ");
@@ -145,7 +145,7 @@ public class Panel2d extends JPanel
 				newNumber = baseController.myLairs[rowGet][colGet].getNumberOfMonsters();
 				newNumberString = Integer.toString(newNumber);
 				editFieldNumber.setText(newNumberString);
-				
+				currentLair.setText("Current Lair: " + rowGet + ", " + colGet);
 				
 			}
 		});
