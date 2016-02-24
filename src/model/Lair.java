@@ -19,7 +19,7 @@ public class Lair
 	
 	public String toString()
 	{
-		String entityDescription = "This lair has " + numberOfMonsters + " monster(s), and they are " + monsterType + "'s";
+		String entityDescription = numberOfMonsters + monsterType + "'s";
 		
 		return entityDescription;
 	}
